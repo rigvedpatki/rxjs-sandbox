@@ -1,20 +1,45 @@
 import { Observable, Observer } from "rxjs";
 
-let observable = Observable.create((observer: Observer<any>) => {
-  observer.next("Hello World");
-  observer.next("Hello Again");
-  observer.complete();
+const observable1 = Observable.create((observer: Observer<any>) => {
+  observer.next("Observable One is Alive !");
+  setInterval(() => {
+    observer.next("Observable One");
+  }, 5000);
 });
 
-observable.subscribe(
-  (x: any) => logItem(x),
-  (error: any) => logItem(error),
-  () => logItem("Completed")
-);
+const observable2 = Observable.create((observer: Observer<any>) => {
+  observer.next("Observable Two is Alive !");
+  setInterval(() => {
+    observer.next("Observable Two");
+  }, 2500);
+});
 
-function logItem(val: any) {
+const subscription1 = observable1.subscribe((x: string) => logItem(x, 1));
+const subscription2 = observable2.subscribe((x: string) => logItem(x, 2));
+
+function logItem(val: string, col: number) {
   let li = document.createElement("li");
   let textNode = document.createTextNode(val);
   li.append(textNode);
-  document.getElementById("list").appendChild(li);
+  if (col === 2) {
+    document.getElementById("list2").appendChild(li);
+  } else if (col === 1) {
+    document.getElementById("list1").appendChild(li);
+  }
 }
+
+// Event handler
+const unsubcribeBtn1 = document.getElementById("unsubcribeBtn1");
+unsubcribeBtn1.addEventListener("click", () => {
+  subscription1.unsubscribe();
+});
+
+const unsubcribeBtn2 = document.getElementById("unsubcribeBtn2");
+unsubcribeBtn2.addEventListener("click", () => {
+  subscription2.unsubscribe();
+});
+
+const addSubscription = document.getElementById("addSubscriptionBtn");
+addSubscription.addEventListener("click", () => {
+  subscription2.add(subscription1);
+});
