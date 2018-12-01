@@ -1,0 +1,22 @@
+{
+  "name": "rxjs-sandbox",
+  "version": "1.0.0",
+  "description": "RxJS Sandbox",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development"
+  },
+  "keywords": [],
+  "author": "Rigved Patki <rigved.patki@gmail.com>",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "rxjs": "^6.3.3",
+    "ts-loader": "^5.3.1",
+    "typescript": "^3.2.1",
+    "webpack": "^4.26.1",
+    "webpack-dev-server": "^3.1.10"
+  }
+}
